@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "JobSmith",
+    "version": "0.0.1",
+    "description": "JobSmith extension that allows you to store your jobs in JobSmith platform, track your progress, rank the jobs according to your skills and preferences, and suggestions powered by AI. All of this in real-time.",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "JobSmith.png"
+    },
+    "icons": {
+        "64": "JobSmith.png"
+    },
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "tabs",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "assets/background.js"
+    },
+    "host_permissions": ["*://*/*"]
+}
