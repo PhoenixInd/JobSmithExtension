@@ -8,12 +8,16 @@
         "default_icon": "JobSmith.png"
     },
     "icons": {
-        "128": "JobSmith.png"
+        "64": "JobSmith.png"
     },
     "permissions": [
         "scripting",
         "activeTab",
         "tabs",
         "storage"
-    ]
+    ],
+    "background": {
+        "service_worker": "assets/background.js"
+    },
+    "host_permissions": ["*://*/*"]
 }
