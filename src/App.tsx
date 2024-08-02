@@ -1,8 +1,15 @@
 import smith from './assets/Smith.png'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { Header } from './components/Header'
 
 function App() {
+  const navigate = useNavigate()
+
+  const getStarted = () => {
+    navigate('/auth')
+    console.log('Get Started');
+  }
 
   return (
     <>
@@ -17,7 +24,7 @@ function App() {
         <p className='text-[#979797]'>
           Centralize all aspects of your professional career, enhance your skills, and boost your decisions.
         </p>
-        <button >
+        <button onClick={getStarted}>
           Get Started
         </button>
       </div>

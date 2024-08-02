@@ -1,4 +1,4 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId) => {
   chrome.scripting.executeScript({
     target: { tabId: tabId },
     files: ['assets/contentScript.js']
@@ -7,7 +7,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   });
 });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   if (message.type === 'SCRAPED_DATA') {
     console.log('Data received from content script:', message.data);
     // Aquí puedes manejar los datos, guardarlos en storage, etc.
