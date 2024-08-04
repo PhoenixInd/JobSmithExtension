@@ -1,0 +1,26 @@
+#root {
+    max-width: 1280px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    width: 100%;
+}
+.app-box{
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6px;
+
+}
+h3{
+    font-weight: 600;
+    font-size: 13px;
+}
+h2{
+    font-weight: 700;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+}
