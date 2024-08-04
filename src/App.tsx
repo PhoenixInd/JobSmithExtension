@@ -17,6 +17,10 @@ function App() {
         if (isValid) {
           setUser(user);
           navigate('/home', { state: { user } });
+        }else{
+          localStorage.removeItem('token');
+          navigate('/auth');
+          alert('Session expired, please log in again');
         }
       }
   };
