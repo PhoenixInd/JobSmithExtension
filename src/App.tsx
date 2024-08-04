@@ -1,14 +1,31 @@
 import smith from './assets/Smith.png'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
+import { authService } from "@services/authService";
 import { Header } from './components/Header'
+import { useEffect, useState } from 'react'
 
 function App() {
   const navigate = useNavigate()
+  const [, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const { isValid, user } = await authService.validateToken();
+        if (isValid) {
+          setUser(user);
+          navigate('/home', { state: { user } });
+        }
+      }
+  };
+
+    checkAuth();
+  }, [navigate]);
 
   const getStarted = () => {
-    navigate('/auth')
-    console.log('Get Started');
+    navigate('/auth');
   }
 
   return (

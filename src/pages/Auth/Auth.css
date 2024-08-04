@@ -18,3 +18,54 @@ input{
     background-color: transparent;
     border-bottom: 1px solid black;
 }
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+  
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.switch-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0.25rem;
+    font-size: 1rem;
+}
+
+.secondary-action {
+    font-size: 1rem;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-weight: 500;
+    font-family: inherit;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: none;
+    border: none;
+}
+
+.signup-fields.show {
+    max-height: 100%;
+    opacity: 1;
+}
+  
+.signup-fields.hide {
+    max-height: 0;
+    opacity: 0;
+}
+
+.secondary-action:hover {
+    color: #CCA349;
+}
+
+.secondary-action span {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
