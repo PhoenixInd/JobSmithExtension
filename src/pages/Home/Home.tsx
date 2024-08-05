@@ -5,6 +5,8 @@ import { authService } from "@services/authService";
 import Avvvatars from "avvvatars-react";
 import "./Home.css"
 
+import { testOllama } from "@services/agent"; 
+
 interface App{
     statusId: number
     offerId: number
@@ -22,7 +24,6 @@ interface User {
 function Home() {
   const location = useLocation();
   const [user, setUser] = useState<User>(location.state?.user);
-
   useEffect(() => {
     const fetchUser = async () => {
       if (!user) {
@@ -91,6 +92,7 @@ function Home() {
             <button className="h-9 leading-7 text-sm flex items-center justify-center" onClick={addApplication}>
                 Add application
             </button>
+            <button onClick={()=>{testOllama()}}>testOllama</button>
         </div>
         
     </>
