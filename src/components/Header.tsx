@@ -12,6 +12,7 @@ export function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("reduxState");
     setHasToken(false);
     navigate('/auth');
   }
