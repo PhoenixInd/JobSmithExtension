@@ -51,25 +51,24 @@ const testOllama = ()=>{
 /*----------------------------------------*/
 
 const askVercel = async (prompt:string)=>{
+
     const mistral_api_key:string = import.meta.env.VITE_MISTRAL_API_KEY
-    console.log(mistral_api_key)
 
     const mistral = createMistral({
         apiKey: mistral_api_key
       });
 
-    const model = mistral('mistral-large-latest', {
-        safePrompt: true, // optional safety prompt injection
+    const model = mistral('open-mistral-7b', {
+        safePrompt: true,
     })
 
-    const message:AgentMessage = {
+    const { object } =  await generateObject({
         model: model,
-        stream: false,
         system: system,
-        prompt: prompt
-    }
-    const { object } =  await generateObject(message as any);
-
+        prompt: prompt,
+        schema: responseSchema,
+    });
+    console.log(object)
     return object
 }
 
