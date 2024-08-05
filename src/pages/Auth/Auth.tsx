@@ -65,7 +65,6 @@ function Auth() {
                 await authService.login(data);
                 const { isValid, user } = await authService.validateToken();
                 if (isValid) {
-                    console.log(user);
                     handleSetUser(user);
                     navigate('/home');
                     alert('Login successful');

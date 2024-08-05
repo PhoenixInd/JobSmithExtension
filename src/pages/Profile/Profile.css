@@ -3,11 +3,21 @@ h1{
     font-weight: 500;
 }
 
-p{
+p, li, input{
     font-size: 12px;
     font-weight: 400;
     color: #979797;
     font-family: Inter;
+}
+input{
+    height: 40px;
+}
+.about{
+    min-width: 320px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .profile-container{
@@ -17,7 +27,7 @@ p{
     padding: 18px;
 }
 
-.back-button, .edit-button, .save-button {
+.back-button, .edit-button, .save-button, .add-button, .remove-button {
     background-color: transparent;
     color: white;
     border: none;
@@ -44,7 +54,15 @@ p{
     fill: red;
 }
 
-.cancel-edit, .save, .edit {
+.add-button:hover .add {
+    fill: #CCA349;
+}
+
+.remove-button:hover .remove {
+    fill: red;
+}
+
+.cancel-edit, .save, .edit, .add, .remove {
     width: 20px;
     height: 20px;
     fill: black;

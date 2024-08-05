@@ -21,7 +21,14 @@ interface Profile{
     website: string | null
 }
 
+interface UserSkill{
+    userId: number
+    skillId: string
+    Skill: Skill
+}
+
 interface Skill{
+    id: number
     name: string
 }
 
@@ -31,7 +38,7 @@ interface User {
     profile: Profile
     Role: Role
     roleId: number
-    skills: Skill[]
+    skills: UserSkill[]
     applications: App[]
 }
 
