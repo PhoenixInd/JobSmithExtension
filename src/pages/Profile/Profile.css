@@ -1,0 +1,58 @@
+h1{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+p{
+    font-size: 12px;
+    font-weight: 400;
+    color: #979797;
+    font-family: Inter;
+}
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+}
+
+.back-button, .edit-button, .save-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.back-button:hover .back-arrow{
+    fill: #CCA349;
+}
+
+.save-button:hover .save{
+    fill: #CCA349;
+}
+
+.edit-button:hover .edit{
+    fill: #CCA349;
+}
+
+.edit-button:hover .cancel-edit {
+    fill: red;
+}
+
+.cancel-edit, .save, .edit {
+    width: 20px;
+    height: 20px;
+    fill: black;
+}
+
+.back-arrow {
+    width: 20px;
+    height: 20px;
+    fill: black;
+    transform: rotate(180deg);
+}

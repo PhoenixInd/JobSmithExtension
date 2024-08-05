@@ -13,6 +13,12 @@ body{
     flex-direction: column;
     align-items: flex-start;
     padding: 6px;
+}
+.profile{
+    display: grid;
+    grid-template-areas: 
+    "empty avatar edit";
+    grid-template-columns: 1fr 1fr 1fr;
 
 }
 h3{
