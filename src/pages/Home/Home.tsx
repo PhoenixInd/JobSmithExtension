@@ -4,13 +4,13 @@ import { Link  } from "react-router-dom";
 import { authService } from "@services/authService";
 import Avvvatars from "avvvatars-react";
 import "./Home.css"
+import { testOllama, testVercel } from "@services/agent"; 
 import { useAppSelector } from "@hooks/store";
 import { UserActions } from "@hooks/user/UserActions";
 
 function Home() {
     const user = useAppSelector((state) => state.user);
     const { handleSetUser } = UserActions()
-
   useEffect(() => {
     const fetchUser = async () => {
       if (!user) {
@@ -88,6 +88,8 @@ function Home() {
             <button className="h-9 leading-7 text-sm flex items-center justify-center" onClick={addApplication}>
                 Add application
             </button>
+            <button onClick={()=>{testOllama()}}>testOllama</button>
+            <button onClick={()=>{testVercel()}}>testVercel</button>
         </div>
         
     </>
