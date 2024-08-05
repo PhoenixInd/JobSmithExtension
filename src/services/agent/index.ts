@@ -1,3 +1,3 @@
 export * from './agent'
-export * from './agent-config'
+export * from './agent-manager'
 export * from './system'

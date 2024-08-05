@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ai-sdk/mistral": "^0.0.26",
     "@types/chrome": "^0.0.269",
     "ai": "^3.2.43",
     "avvvatars-react": "^0.4.2",

@@ -5,7 +5,7 @@ import { authService } from "@services/authService";
 import Avvvatars from "avvvatars-react";
 import "./Home.css"
 
-import { testOllama } from "@services/agent"; 
+import { testOllama, testVercel } from "@services/agent"; 
 
 interface App{
     statusId: number
@@ -93,6 +93,7 @@ function Home() {
                 Add application
             </button>
             <button onClick={()=>{testOllama()}}>testOllama</button>
+            <button onClick={()=>{testVercel()}}>testVercel</button>
         </div>
         
     </>
