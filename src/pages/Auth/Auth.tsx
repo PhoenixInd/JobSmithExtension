@@ -4,6 +4,7 @@ import { authService } from "@services/authService";
 import logo from '@assets/logo.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserActions } from "@hooks/user/UserActions";
 
 interface SignInData {
     email: string;
@@ -19,8 +20,9 @@ interface SignUpData {
 function Auth() {
     const [isSignUp, setIsSignUp] = useState(true);
     const [fade, setFade] = useState(true);
-    const [, setUser] = useState(null);
     const navigate = useNavigate();
+
+    const { handleSetUser } = UserActions()
 
     const formSwitch = () => {
         setFade(false);
@@ -63,8 +65,8 @@ function Auth() {
                 await authService.login(data);
                 const { isValid, user } = await authService.validateToken();
                 if (isValid) {
-                    setUser(user);
-                    navigate('/home', { state: { user } });
+                    handleSetUser(user);
+                    navigate('/home');
                     alert('Login successful');
                 }else{
                     alert('Login failed');

@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { authService } from "@services/authService";
 import { Header } from './components/Header'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { UserActions } from "@hooks/user/UserActions";
 
 function App() {
   const navigate = useNavigate()
-  const [, setUser] = useState(null);
+  const { handleSetUser } = UserActions()
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -15,8 +16,8 @@ function App() {
       if (token) {
         const { isValid, user } = await authService.validateToken();
         if (isValid) {
-          setUser(user);
-          navigate('/home', { state: { user } });
+          handleSetUser(user);
+          navigate('/home');
         }else{
           localStorage.removeItem('token');
           navigate('/auth');
@@ -26,7 +27,7 @@ function App() {
   };
 
     checkAuth();
-  }, [navigate]);
+  }, [handleSetUser, navigate]);
 
   const getStarted = () => {
     navigate('/auth');

@@ -1,36 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Header } from "@components/Header";
-import { useLocation } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import { authService } from "@services/authService";
 import Avvvatars from "avvvatars-react";
 import "./Home.css"
-
 import { testOllama, testVercel } from "@services/agent"; 
-
-interface App{
-    statusId: number
-    offerId: number
-    userId: number
-    url: string
-}
-
-interface User {
-    id: number
-    name: string
-    email: string
-    applications: App[]
-}
+import { useAppSelector } from "@hooks/store";
+import { UserActions } from "@hooks/user/UserActions";
 
 function Home() {
-  const location = useLocation();
-  const [user, setUser] = useState<User>(location.state?.user);
+    const user = useAppSelector((state) => state.user);
+    const { handleSetUser } = UserActions()
   useEffect(() => {
     const fetchUser = async () => {
       if (!user) {
         try {
           const {isValid, user} = await authService.validateToken();
           if(isValid) {
-            setUser(user);
+            handleSetUser(user);
           }
         } catch (error) {
           console.error("Failed to fetch user", error);
@@ -39,7 +26,7 @@ function Home() {
     };
 
     fetchUser();
-  }, [user]);
+  }, [handleSetUser, user]);
 
   const addApplication = () => {
     console.log("add application");
@@ -49,7 +36,16 @@ function Home() {
     <>
         <Header />
         <div className='pr-6 pl-6 pt-6 h-full flex flex-col items-center'>
-            <Avvvatars value ={user?.name} size={85} border={true} borderColor="#CCA349" borderSize={3}/>
+            <div className="profile">
+                <div className="avatar [grid-area:avatar]" >
+                    <Avvvatars value={user?.name} size={85} border={true} borderColor="#CCA349" borderSize={3}/>
+                </div>
+                <div className="edit [grid-area:edit] flex items-center">
+                    <Link to="/profile">
+                        Edit Profile
+                    </Link>
+                </div>
+            </div>
             <h1 className="text-base font-medium">
                 {user?.name || "Loading..."}
             </h1>
