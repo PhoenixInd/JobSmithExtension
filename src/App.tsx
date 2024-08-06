@@ -1,8 +1,37 @@
 import smith from './assets/Smith.png'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
+import { authService } from "@services/authService";
 import { Header } from './components/Header'
+import { useEffect } from 'react'
+import { UserActions } from "@hooks/user/UserActions";
 
 function App() {
+  const navigate = useNavigate()
+  const { handleSetUser } = UserActions()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const { isValid, user } = await authService.validateToken();
+        if (isValid) {
+          handleSetUser(user);
+          navigate('/home');
+        }else{
+          localStorage.removeItem('token');
+          navigate('/auth');
+          alert('Session expired, please log in again');
+        }
+      }
+  };
+
+    checkAuth();
+  }, [handleSetUser, navigate]);
+
+  const getStarted = () => {
+    navigate('/auth');
+  }
 
   return (
     <>
@@ -17,7 +46,7 @@ function App() {
         <p className='text-[#979797]'>
           Centralize all aspects of your professional career, enhance your skills, and boost your decisions.
         </p>
-        <button >
+        <button onClick={getStarted}>
           Get Started
         </button>
       </div>

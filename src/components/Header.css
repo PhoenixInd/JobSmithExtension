@@ -1,0 +1,27 @@
+header{
+    min-width: 320px;
+}
+
+.logout:hover {
+    color: #CCA349;
+}
+
+.logout span {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.logout {
+    font-size: 1rem;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    font-weight: 500;
+    font-family: inherit;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: none;
+    border: none;
+}
