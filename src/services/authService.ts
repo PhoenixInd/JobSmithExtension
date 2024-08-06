@@ -36,6 +36,9 @@ const login = async (data: SignInData) => {
         const response = await axios.post(`${apiUrl}/auth/login`, data);
         const token = response.data.access_token;
         localStorage.setItem('token', token);
+        chrome.storage.local.set({'tokenChrome':token}, () => {
+            console.log('Token is saved to chrome.storage');
+          })
         setAuthToken(token);
         return response.data;
     } catch (error) {

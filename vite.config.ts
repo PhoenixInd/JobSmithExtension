@@ -8,11 +8,13 @@ export default defineConfig({
     react()
   ],
   build: {
+    target: "ES2022",
     rollupOptions:{
     input:{
       main: 'index.html',
       background: "src/background/background.ts", // Entry Point
       contentScript: 'src/content/contentScript.ts',
+      editHTML: 'src/content/editHTML.ts',
       popup: 'src/App.tsx'
     },
     output:{
