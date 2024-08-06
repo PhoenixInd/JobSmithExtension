@@ -29,19 +29,19 @@ const askOllama = async (prompt:string)=>{
     }
 
     try {
-        const response = await axios.post(ollamaURL, message as any);
-        return response.data;
+        const response = await axios.post(ollamaURL, message as any)
+        .then((response)=>response.data.response)
+        .catch((err)=>console.log(err));
+        return JSON.parse(response);
     } catch (error) {
         console.log(error)
     }
     
 }
 
-const testOllama = ()=>{
+const testOllama = async ()=>{
     const prompt:string = "Aplicante: Soy experto en python. Oferta: se necesita a un experto en python"
-    const request = askOllama(prompt)
-    .then((response)=>console.log(response))
-    .catch((err)=>console.log(err));
+    const request = await askOllama(prompt)
     return request
 }
 
@@ -68,7 +68,7 @@ const askVercel = async (prompt:string)=>{
         prompt: prompt,
         schema: responseSchema,
     });
-    console.log(object)
+
     return object
 }
 

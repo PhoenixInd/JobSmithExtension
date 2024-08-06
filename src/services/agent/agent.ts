@@ -11,22 +11,17 @@ class Agent {
         this.agent = agent ?? "vercel"
         this.system = system;
         this.model = "mistral"
-
-        if(agent == "vercel"){
-
-        }
     }
 
-    askAgent(prompt:string){
+    async askAgent(prompt:string){
 
         switch (this.agent){
             case "vercel":
-                askVercel(prompt)
-                break;
+                return await askVercel(prompt)
             case "ollama":
-                askOllama(prompt)
-                break;
+                return await askOllama(prompt)
         }
+        
     }
 }
 
