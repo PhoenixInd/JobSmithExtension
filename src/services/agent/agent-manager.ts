@@ -58,7 +58,7 @@ const askVercel = async (prompt:string)=>{
         apiKey: mistral_api_key
       });
 
-    const model = mistral('open-mistral-7b', {
+    const model = mistral('mistral-large-latest', {
         safePrompt: true,
     })
 

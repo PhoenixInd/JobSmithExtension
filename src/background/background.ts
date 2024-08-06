@@ -49,7 +49,7 @@ async function askAgent(userInfo:UserProcessedInfo, jobInfo:JobProcessedInfo){
     jobInfo: jobInfo
   }
 
-  const agent = new Agent("ollama")
+  const agent = new Agent("vercel")
   const agentResponse = await agent.askAgent(JSON.stringify(data))
   console.log(agentResponse)
   return agentResponse
