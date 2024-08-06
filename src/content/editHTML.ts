@@ -98,7 +98,7 @@ function changeInnerJobSmithButton(selectionProbabilities?:"Low"|"Medium"|"High"
     const JSButton = document.getElementsByClassName("job-smith-button")[0] as HTMLElement;
 
     if(!selectionProbabilities){
-        JSButton.innerHTML = "...";
+        JSButton.innerHTML = "Analyzing...";
         return
     }
 
@@ -109,7 +109,7 @@ function changeInnerJobSmithFrame(agentResponse?:string){
     const JSFrame = document.getElementsByClassName("job-smith-frame")[0] as HTMLElement;
 
     if(!agentResponse){
-        JSFrame.innerHTML = "...";
+        JSFrame.innerHTML = "Analyzing, please wait...";
         return
     }
 
