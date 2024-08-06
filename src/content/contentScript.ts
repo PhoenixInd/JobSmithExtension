@@ -7,18 +7,18 @@ interface JobProcessedInfo{
 }
 
 function cleanHTMLTags(htmlComponent:string){
-    let clearTags = htmlComponent.replaceAll(/<[^>]*>/g, " ");
-    let trimText = clearTags.trim()
+    const clearTags = htmlComponent.replaceAll(/<[^>]*>/g, " ");
+    const trimText = clearTags.trim()
     return trimText
     }
     
 function getLinkdinJob(){
   console.log("get linkedin")
-    let description = document.getElementsByClassName("jobs-description__container")[0].getElementsByClassName("mt4")[0].innerHTML;
-    let title = document.getElementsByClassName("job-details-jobs-unified-top-card__container--two-pane")[0].getElementsByClassName("job-details-jobs-unified-top-card__job-title")[0].innerHTML;
-    let company_name = document.getElementsByClassName("jobs-company__box")[0].getElementsByClassName("artdeco-entity-lockup__title")[0].innerHTML;
+    const description = document.getElementsByClassName("jobs-description__container")[0].getElementsByClassName("mt4")[0].innerHTML;
+    const title = document.getElementsByClassName("job-details-jobs-unified-top-card__container--two-pane")[0].getElementsByClassName("job-details-jobs-unified-top-card__job-title")[0].innerHTML;
+    const company_name = document.getElementsByClassName("jobs-company__box")[0].getElementsByClassName("artdeco-entity-lockup__title")[0].innerHTML;
     
-    let job_info:JobProcessedInfo = {
+    const job_info:JobProcessedInfo = {
       title: "",
       description: "",
       company_name: "",
@@ -37,12 +37,29 @@ function getLinkdinJob(){
     return job_info
 }
 
-(async function(test) {
-  console.log(test)
-    chrome.runtime.sendMessage({
+function waitForJobElements() {
+  return new Promise<void>((resolve) => {
+      const observer = new MutationObserver((mutations, observer) => {
+        const description = document.getElementsByClassName("jobs-description__container")[0].getElementsByClassName("mt4")[0].innerHTML;
+        const title = document.getElementsByClassName("job-details-jobs-unified-top-card__container--two-pane")[0].getElementsByClassName("job-details-jobs-unified-top-card__job-title")[0].innerHTML;
+        const company_name = document.getElementsByClassName("jobs-company__box")[0].getElementsByClassName("artdeco-entity-lockup__title")[0].innerHTML;
+
+          if (description && title && company_name) {
+              observer.disconnect();
+              resolve();
+          }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+  });
+}
+
+(async function () {
+  await waitForJobElements();
+  chrome.runtime.sendMessage({
       type: 'SCRAPED_DATA',
       data: getLinkdinJob()
-    });
+  });
 })();
 
 export default JobProcessedInfo

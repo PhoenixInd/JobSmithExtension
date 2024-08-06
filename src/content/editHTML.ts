@@ -1,5 +1,5 @@
 function createJobSmithButton(){
-    let button = document.createElement('button');
+    const button = document.createElement('button');
     button.className = "job-smith-button"
     button.style.backgroundColor = "#CCA349";
     button.style.borderRadius = "12px";
@@ -13,7 +13,7 @@ function createJobSmithButton(){
 }
 
 function createJobSmithFrame(){
-    let styles = `
+    const styles = `
         font-size: 16px;
         color: black;
         padding: 0.4em 1em;
@@ -24,11 +24,12 @@ function createJobSmithFrame(){
         justify-content: center;
         max-height: 800px;
         width: 100%;
+        background-color: #FFF8F2;
         border-radius: 20px;
         border: 1px solid #f1f1f1;
     `
 
-    let frame = document.createElement('div');
+    const frame = document.createElement('div');
     frame.className = "job-smith-frame"
     frame.style.cssText = styles;
     return frame
@@ -37,14 +38,14 @@ function createJobSmithFrame(){
 async function insertRecomendation(){
     console.log("entro")
     // Button
-    let buttons = document
+    const buttons = document
     .getElementsByClassName("job-details-jobs-unified-top-card__container--two-pane")[0]
     .getElementsByClassName("mt5")[0]
     .getElementsByClassName("display-flex")[0];
 
     let JSButton = buttons.getElementsByClassName("job-smith-button");
     if(!(JSButton.length>0)){
-        let newButton = createJobSmithButton()
+        const newButton = createJobSmithButton()
         buttons.appendChild(newButton)
         JSButton = buttons.getElementsByClassName("job-smith-button");
     }
@@ -52,20 +53,20 @@ async function insertRecomendation(){
     changeInnerJobSmithButton();
 
     // Frame
-    let frameConteiner = document
+    const frameConteiner = document
     .getElementsByClassName("job-details-jobs-unified-top-card__container--two-pane")[0]
     .getElementsByClassName("mt5")[0]
 
     let JSFrame = frameConteiner.getElementsByClassName("job-smith-frame");
     if(!(JSFrame.length>0)){
-        let newFrame = createJobSmithFrame()
+        const newFrame = createJobSmithFrame()
         frameConteiner.appendChild(newFrame)
         JSFrame = buttons.getElementsByClassName("job-smith-frame");
     }
 
     changeInnerJobSmithFrame()
 
-    let agentResponse = await chrome.storage.local.get(null)
+    const agentResponse = await chrome.storage.local.get(null)
     
     console.log(agentResponse)
        
@@ -73,7 +74,7 @@ async function insertRecomendation(){
 
 function changeColorJobSmithButton(selectionProbabilities?:"Low"|"Medium"|"High"){
     
-    let JSButton = document.getElementsByClassName("job-smith-button")[0] as HTMLElement;
+    const JSButton = document.getElementsByClassName("job-smith-button")[0] as HTMLElement;
 
     if(!selectionProbabilities){
         JSButton.style.backgroundColor = "#CCA349";

@@ -12,6 +12,13 @@ interface UserProcessedInfo{
     skills: Array<string>
 }
 
+interface AgentResponse{
+  selectionProbabilities: string,
+  rankingCriteria: string,
+  agentResponse: string,
+  companyName: string
+}
+
 
 // Get user info
 async function getUserInfo(){
@@ -29,7 +36,7 @@ async function getUserInfo(){
 
 // Process user info
 function processUserData(data:UserData){
-let cleanData:UserProcessedInfo = {
+const cleanData:UserProcessedInfo = {
   profession: data.profile.profession,
   bio: data.profile.bio,
   location: data.profile.location,
@@ -51,43 +58,33 @@ async function askAgent(userInfo:UserProcessedInfo, jobInfo:JobProcessedInfo){
 
   const agent = new Agent("vercel")
   const agentResponse = await agent.askAgent(JSON.stringify(data))
-  console.log(agentResponse)
   return agentResponse
 }
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-  if(changeInfo.status === "complete" && /^http/.test(tab.url as any)){
+  if (changeInfo.status === 'complete' && tab.url?.includes('linkedin.com/jobs')) {
+    console.log('Execute script');
     await chrome.scripting.executeScript({
       target: { tabId: tabId },
-      files: ['assets/contentScript.js', 'assets/editHTML.js']
+      files: ['assets/contentScript.js', 'assets/editHTML.js'],
     }).catch((error) => {
       console.error('Error executing content script:', error);
     });
-  }  
-});
-
-  
-chrome.runtime.onMessage.addListener(async (message) => {
-  if (message.type === 'SCRAPED_DATA') {
-    const jobInfo = message.data
-    const userData = await getUserInfo().then((response)=>processUserData(response as UserData));
-    const agentResponse:any = askAgent(userData, jobInfo)
-    chrome.storage.local.set({'agentResponse':agentResponse})
   }
 });
-
 
 chrome.runtime.onMessage.addListener(async (message) => {
   if (message.type === 'SCRAPED_DATA') {
     console.log('Data received from content script:', message.data);
-    const jobInfo = message.data
-    const userData = await getUserInfo().then((response)=>processUserData(response as UserData));
-    const agentResponse:any = await askAgent(userData, jobInfo)
-    chrome.storage.local.set({'agentResponse':agentResponse}, async () => {
+    const jobInfo = message.data;
+    const userData = await getUserInfo().then((response) => processUserData(response as UserData));
+    const agentResponse: AgentResponse = await askAgent(userData, jobInfo);
+    chrome.storage.local.set({ agentResponse: agentResponse }, async () => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          let activeTab = tabs[0];
-          chrome.tabs.sendMessage(activeTab.id as any, {msg: "agentResponse_saved", data: agentResponse});  
-        })
+        const activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id as number, { msg: 'agentResponse_saved', data: agentResponse });
       });
-    }});
+    });
+  }
+});
 

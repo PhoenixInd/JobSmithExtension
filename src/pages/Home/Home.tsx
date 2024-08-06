@@ -4,7 +4,6 @@ import { Link  } from "react-router-dom";
 import { authService } from "@services/authService";
 import Avvvatars from "avvvatars-react";
 import "./Home.css"
-import { testOllama, testVercel } from "@services/agent"; 
 import { useAppSelector } from "@hooks/store";
 import { UserActions } from "@hooks/user/UserActions";
 
@@ -85,11 +84,9 @@ function Home() {
                     </h2>
                 </div>
             </div>
-            <button className="h-9 leading-7 text-sm flex items-center justify-center" onClick={addApplication}>
-                Add application
+            <button className="h-9 leading-7 text-sm flex items-center justify-center bg-gray-500" onClick={addApplication} disabled>
+                Add application Coming Soon
             </button>
-            <button onClick={()=>{testOllama()}}>testOllama</button>
-            <button onClick={()=>{testVercel()}}>testVercel</button>
         </div>
         
     </>

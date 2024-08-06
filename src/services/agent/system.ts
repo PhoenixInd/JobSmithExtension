@@ -16,7 +16,7 @@ const agent_response_structure = {
 
 
 const system = `Tu eres un sistema de recomendación. 
-Reciviras la información de una oferta laboral y la información de una persona que incluye sus habilidades y resumen de sus capacidades laborales. 
+Recibiras la información de una oferta laboral y la información de una persona que incluye sus habilidades y resumen de sus capacidades laborales. 
 Dentro de la información del aplicante encontraras la profesión (o carrera), lugar de residencia (ten en cuenta que algunos trabajos pueden ser remotos/virtuales), y algunas habilidades/tecnologías que sabe usar.
 Debes evaluar que tan viable es esta oferta de acuerdo para el usuario en cuestion. 
 Debes tener en cuenta que las skills de la persona no necesariamente estan relacionadas con la oferta laboral.
